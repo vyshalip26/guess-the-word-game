@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Guess the Word Game</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            color: #333;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            padding: 5px;
+            font-size: 16px;
+            width: 30px;
+        }
+
+        input[type="submit"] {
+            padding: 5px 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .form-1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .game-over-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            z-index: 1000;
+        }
+
+        .game-over-dialog {
+            background: white;
+            color: #222;
+
+            padding: 35px;
+            border-radius: 15px;
+
+            width: 90%;
+            max-width: 400px;
+
+            text-align: center;
+
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        .game-over-dialog h2 {
+            margin-top: 0;
+        }
+
+        .game-over-dialog strong {
+            font-size: 24px;
+            color: #d9534f;
+        }
+
+        .game-over-buttons {
+            margin-top: 25px;
+
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .game-over-buttons a {
+            text-decoration: none;
+
+            padding: 10px 20px;
+            border-radius: 8px;
+
+            background: #014a36;
+            color: white;
+
+            font-weight: bold;
+        }
+
+        .game-over-buttons a:hover {
+            opacity: 0.85;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 align="center">Welcome to the Guess the Word Game</h1>
+    <h3 align="center"> CATEGORY:  <b th:text="${category}">Fruits</b></h3>
+    <h2 align="center">
+        Guess this hidden word:
+        <span th:text="${updatedWord}">DEFAULT WORD</span>
+    </h2>
+
+    <p align="right">
+        You have
+        <b th:text="${remainingAttempts}">5</b>
+        attempts remaining
+    </p>
+
+    <hr style="border: 11px solid #014a36c5;">
+
+    <div align="center">
+
+        <!-- GUESS FORM -->
+        <form th:action="@{/game}" method="GET" class="form-1">
+
+            <!-- Preserve selected category -->
+            <input
+                type="hidden"
+                name="category"
+                th:value="${category}"
+            >
+
+            <label for="guessedChar">Guess a character:</label>
+
+            <input
+                type="text"
+                id="guessedChar"
+                name="guessedChar"
+                maxlength="1"
+                required
+            >
+
+            <input type="submit" value="Try">
+
+        </form>
+
+
+        <!-- RESTART FORM -->
+        <form th:action="@{/game}" method="GET">
+
+            <!-- Restart the SAME category -->
+            <input
+                type="hidden"
+                name="category"
+                th:value="${category}"
+            >
+
+            <input type="submit" value="Restart Game">
+
+        </form>
+        <!-- GAME OVER DIALOG -->
+        <div class="game-over-overlay" th:if="${gameOver}">
+
+            <div class="game-over-dialog">
+
+                <h2>Game Over! 😢</h2>
+
+                <p>You have <b>0 attempts remaining</b>.</p>
+
+                <p>
+                    The word was:
+                    <strong th:text="${correctWord}">apple</strong>
+                </p>
+
+                <div class="game-over-buttons">
+
+                    <!-- Restart same category -->
+                    <a th:href="@{/game(category=${category})}">
+                        🔄 Restart
+                    </a>
+
+                    <!-- Go back home -->
+                    <a th:href="@{/}">
+                        🏠 Back
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
