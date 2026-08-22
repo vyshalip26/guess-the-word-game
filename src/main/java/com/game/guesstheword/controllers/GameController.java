@@ -66,10 +66,11 @@ public class GameController {
                 gameUtils.getRemainingAttempts()
         );
 
-        // Send category back to HTML
         model.addAttribute("category", game_category);
         model.addAttribute("gameOver",gameOver);
         System.out.println("Guessed character: " + guessedCh);
+        model.addAttribute("gameWon", gameService.isGameWon());
+        model.addAttribute("chosenWord", gameService.getChosenWord());  
          // Game over check
         if (gameOver) { 
             model.addAttribute("correctWord",

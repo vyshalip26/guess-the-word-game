@@ -22,7 +22,7 @@ public class GameService {
         "lion", "tiger", "elephant", "zebra", "monkey", "rabbit","sheep","deer","dinosaur"
     };
     private String[] birds={
-        "peackock","kingfisher","flamingo","ostrich","rooster","penguin","vulture"
+        "peacock","kingfisher","flamingo","ostrich","rooster","penguin","vulture"
     };
     private String[] food={
         "pizza","burger","sushi","sandwich","cake","popcorn","chips","pasta","waffles","noodles","nachos"
@@ -74,6 +74,14 @@ public class GameService {
             
         }
         return word;
+    }
+    public boolean isGameWon() {
+        for (char c : allCharsOfTheWord) {
+            if (c == '\u0000') {
+                return false;
+            }
+        }
+        return true;
     }
     public String check(char ch)
     { 

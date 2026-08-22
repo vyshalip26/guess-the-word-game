@@ -160,6 +160,36 @@
             <input type="submit" value="Restart Game">
 
         </form>
+        <!-- SUCCESS DIALOG -->
+        <div id="successDialog" class="dialog-overlay"
+            th:if="${gameWon}">
+
+            <div class="dialog-box">
+
+                <h2>🎉 Congratulations!</h2>
+
+                <p>You guessed the word correctly!</p>
+
+                <h3 th:text="${chosenWord}">
+                    WORD
+                </h3>
+
+                <div class="dialog-buttons">
+
+                    <!-- Restart same category -->
+                    <a th:href="@{/game(category=${category})}">
+                        Restart Game
+                    </a>
+
+                    <!-- Go back to categories -->
+                    <a th:href="@{/}">
+                        Back to Categories
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
         <!-- GAME OVER DIALOG -->
         <div class="game-over-overlay" th:if="${gameOver}">
 
