@@ -6,28 +6,7 @@
 <title>Guess the Word — The Garden Stall</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg: #12241b;
-    --bg-2: #0d1c15;
-    --surface: #1c3327;
-    --surface-2: #23402f;
-    --crate-line: #2f5240;
-    --cream: #f5ecd6;
-    --cream-dim: #d8cba9;
-    --ink: #0d1c15;
-
-    --fruit: #e8623f;
-    --veg: #7fb069;
-    --colorz: #c879d6;
-    --food: #e6b23c;
-    --nature: #eb214d;
-    --animals: #87513d;
-
-    --radius: 18px;
-    --shadow: 0 14px 30px rgba(0,0,0,0.35);
-  }
-
+<style> 
   *{ box-sizing: border-box; }
 
   html, body{
@@ -36,212 +15,85 @@
     background:
       radial-gradient(circle at 15% 0%, rgba(127,176,105,0.10), transparent 45%),
       radial-gradient(circle at 85% 100%, rgba(232,98,63,0.08), transparent 45%),
-      var(--bg);
-    color: var(--cream);
+      #f1f2f2;
+    color: #000000;
     font-family: 'Nunito', sans-serif;
   }
 
   h1, h2, h3{ font-family: 'Baloo 2', sans-serif; }
-
-  @media (prefers-reduced-motion: reduce){
-    *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
-  }
-
+ 
   .wrap{
     max-width: 1080px;
     margin: 0 auto;
     padding: 48px 20px 80px;
   }
-
-  /* ---------- HEADER / SIGNBOARD ---------- */
+ 
   .signboard{
     text-align:center;
-    margin-bottom: 46px;
-    animation: dropIn .6s ease both;
-  }
-  @keyframes dropIn{
-    from{ opacity:0; transform: translateY(-18px); }
-    to{ opacity:1; transform: translateY(0); }
-  }
+    margin-bottom: 40px; 
+  } 
 
   .eyebrow{
     display:inline-block;
     font-family:'Baloo 2', sans-serif;
-    font-weight:600;
-    letter-spacing:.14em;
-    text-transform:uppercase;
+    font-weight:600;  
     font-size:12px;
-    color: #cde6b8;
-    background: rgba(127,176,105,0.12);
-    border: 1px solid rgba(127,176,105,0.35);
+    color: #98cc6e;
+    background:#2c4d38; 
     padding: 6px 14px;
     border-radius: 999px;
-    margin-bottom: 16px;
-    animation: floatChip 3.2s ease-in-out infinite;
-  }
-  @keyframes floatChip{
-    0%, 100%{ transform: translateY(0); }
-    50%{ transform: translateY(-4px); }
-  }
+    margin-bottom: 16px; 
+  } 
 
   .signboard h1{
-    font-size: clamp(36px, 6.5vw, 60px);
-    margin: 0 0 14px;
-    font-weight: 800;
-    letter-spacing: -0.01em;
-    color: var(--cream);
-    text-shadow: 0 4px 0 rgba(0,0,0,0.25);
+    font-size: 42px;
+    margin: 0 0 12px;
+    font-weight: 800; 
+    color: #000000; 
+  }
+  .categories{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
   }
 
-  /* letter-by-letter reveal + gradient shimmer on the accent word */
-  .title-line{ display:inline-block; }
-  .title-line .char{
-    display:inline-block;
-    opacity:0;
-    transform: translateY(14px) rotate(-4deg);
-    animation: charIn .5s cubic-bezier(.2,.8,.2,1) forwards;
-  }
-  @keyframes charIn{
-    to{ opacity:1; transform: translateY(0) rotate(0); }
+  .category{
+    display: block;
+    text-decoration: none;
+    background: #23402f;
+    border: 2px solid #2f5240;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    color: #f5ecd6;
   }
 
-  .accent-word{
-    background: linear-gradient(90deg, #ffe6a1, #e6b23c, #7fb069, #ffe6a1);
-    background-size: 300% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: shimmer 5s linear infinite;
+  .category:hover{
+    background: #2c4d38;
   }
-  @keyframes shimmer{
-    0%{ background-position: 0% 50%; }
-    100%{ background-position: 300% 50%; }
+
+  .icon{
+    font-size: 30px;
+    display: block;
+    margin-bottom: 8px;
   }
+
+  .category h3{
+    margin: 0;
+    font-size: 18px;
+  }
+  .accent-word{ 
+    color: #2c4d38; 
+  } 
 
   .signboard p.sub{
-    color: var(--cream-dim);
-    font-size: 16px;
-    max-width: 540px;
-    margin: 0 auto;
-    opacity: 0;
-    animation: dropIn .6s ease .4s forwards;
+    color:#f5ecd6;
+    font-size: 15px;
+    max-width: 500px;
+    margin: 0 auto; 
   }
 
-  
-  /* ---------- SECTION LABEL ---------- */
-  .section-label{
-    display:flex;
-    align-items:center;
-    gap: 14px;
-    margin: 0 0 22px;
-  }
-  .section-label h2{
-    font-size: 18px;
-    margin:0;
-    color: var(--cream);
-    letter-spacing: .02em;
-    white-space: nowrap;
-  }
-  .section-label .line{
-    height: 1px;
-    flex: 1;
-    background: linear-gradient(90deg, var(--crate-line), transparent);
-  }
-
-  /* ---------- CATEGORY GRID ---------- */
-  .stalls{
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-    gap: 18px;
-  }
-
-  .stall{
-    position:relative;
-    background: linear-gradient(180deg, var(--surface-2), var(--surface));
-    border: 2px solid var(--crate-line);
-    border-radius: var(--radius);
-    padding: 22px 18px 20px;
-    box-shadow: var(--shadow);
-    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-    overflow:hidden;
-    isolation:isolate;
-    opacity: 0;
-    animation: cardIn .5s ease forwards;
-  }
-  .stall:nth-child(1){ animation-delay: .05s; }
-  .stall:nth-child(2){ animation-delay: .12s; }
-  .stall:nth-child(3){ animation-delay: .19s; }
-  .stall:nth-child(4){ animation-delay: .26s; }
-  .stall:nth-child(5){ animation-delay: .33s; }
-  .stall:nth-child(6){ animation-delay: .36s; }
-  @keyframes cardIn{
-    from{ opacity:0; transform: translateY(16px); }
-    to{ opacity:1; transform: translateY(0); }
-  }
-
-  .stall::before{
-    content:"";
-    position:absolute; inset:0;
-    background: var(--accent, var(--veg));
-    opacity: 0.10;
-    z-index:-1;
-  }
-  .stall::after{
-    content:"";
-    position:absolute;
-    left:0; right:0; top:0;
-    height:6px;
-    background: var(--accent, var(--veg));
-  }
-  .stall:hover{
-    transform: translateY(-6px) rotate(-0.4deg);
-    border-color: var(--accent, var(--veg));
-    box-shadow: 0 20px 34px rgba(0,0,0,0.4);
-  }
-  .stall .icon{
-    font-size: 34px;
-    display:inline-block;
-    margin-bottom: 10px;
-    filter: drop-shadow(0 3px 0 rgba(0,0,0,0.25));
-    transition: transform .3s ease;
-  }
-  .stall:hover .icon{
-    transform: scale(1.15) rotate(-6deg);
-  }
-  .stall h3{
-    margin: 0 0 4px;
-    font-size: 21px;
-    color: var(--cream);
-  }
-  .stall p{
-    margin: 0;
-    font-size: 13px;
-    color: var(--cream-dim);
-  }
-  .stall .count{
-    position:absolute;
-    top: 16px; right: 16px;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing:.05em;
-    background: rgba(0,0,0,0.28);
-    color: var(--cream);
-    padding: 4px 9px;
-    border-radius: 999px;
-  }
-
-  .stall[data-cat="fruits"]{ --accent: var(--fruit); }
-  .stall[data-cat="vegetables"]{ --accent: var(--veg); }
-  .stall[data-cat="colors"]{ --accent: var(--colorz); }
-  .stall[data-cat="food"]{ --accent: var(--food); }
-  .stall[data-cat="animals"]{ --accent: var(--animals); }
-  .stall[data-cat="birds"]{--accent:var(--nature); }
-  footer{
-    text-align:center;
-    margin-top: 50px;
-    color: var(--cream-dim);
-    font-size: 12px;
-  }
+   
 </style>
 </head>
 <body>
@@ -250,77 +102,45 @@
 
   <div class="signboard">
     <span class="eyebrow">🌿 The Garden Stall</span>
-    <h1>
-      <span class="title-line" id="titleLine">Guess the </span><span class="accent-word">Word</span>
-    </h1>
+    <h1>Guess the <span class="accent-word">Word</span></h1>
     <p class="sub">Pick a stall below and see what's waiting to be guessed inside.</p>
   </div>
 
   <div class="section-label">
-    <h2>🧺 Browse Categories</h2>
-    <span class="line"></span>
+    <h2>🧺 Browse Categories</h2> 
   </div>
 
-  <div class="stalls">
-    <a href="/game?category=fruits">
-      <div class="stall" data-cat="fruits"> 
+  <div class="categories">
+      <a href="/game?category=fruits" class="category">
         <span class="icon">🍊</span>
         <h3>Fruits</h3>
-        <p>Sweet, juicy, and full of surprises.</p>
-      </div>
-    </a>
-    <a href="/game?category=vegetables">
-      <div class="stall" data-cat="vegetables" >
+      </a>
+
+      <a href="/game?category=vegetables" class="category">
         <span class="icon">🥕</span>
         <h3>Vegetables</h3>
-        <p>Fresh from the garden bed.</p>
-      </div>
-    </a>
-    <a href="/game?category=colors">
-      <div class="stall" data-cat="colors" > 
+      </a>
+
+      <a href="/game?category=colors" class="category">
         <span class="icon">🎨</span>
         <h3>Colors</h3>
-        <p>A little shade of everything.</p>
-      </div>
-    </a>
-    <a href="/game?category=food">
-      <div class="stall" data-cat="food"> 
+      </a>
+
+      <a href="/game?category=food" class="category">
         <span class="icon">🍕</span>
-        <h3>Food</h3>
-        <p>Comfort dishes from every corner.</p>
-      </div>
-    </a>
-    <a href="/game?category=animals"> 
-      <div class="stall" data-cat="animals"> 
-        <span class="icon">🦁</span>
-        <h3>Animals</h3>
-        <p>Wild, wide, and full of wonder.</p>
-      </div>
-    </a>
-    <a href="/game?category=birds"> 
-      <div class="stall" data-cat="birds"> 
-        <span class="icon">🐦</span>
-        <h3>Birds</h3>
-        <p>Fly high and see the magic.</p>
-      </div>
-    </a>
+          <h3>Colors</h3>
+      </a>
+      <a href="/game?category=animals" class="category">  
+          <span class="icon">🦁</span>
+          <h3>Animals</h3>  
+      </a>
+      <a href="/game?category=birds" class="category">  
+          <span class="icon">🐦</span>
+          <h3>Birds</h3>  
+      </a>
   </div>
-
-  <footer>Pick a category to see what's hidden inside.</footer>
+  </div>
 </div>
-
-<script> 
-  const titleLine = document.getElementById('titleLine');
-  const text = titleLine.textContent;
-  titleLine.textContent = '';
-  [...text].forEach((ch, i) => {
-    const span = document.createElement('span');
-    span.className = 'char';
-    span.style.animationDelay = `${i * 0.035}s`;
-    span.textContent = ch === ' ' ? '\u00A0' : ch;
-    titleLine.appendChild(span);
-  });
-</script>
 
 </body>
 </html>
