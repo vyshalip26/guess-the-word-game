@@ -1,6 +1,5 @@
 package com.game.guesstheword.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,13 +13,10 @@ public class GameController {
     private final GameService gameService;
     private final GameUtils gameUtils;
 
-    @Autowired
     public GameController(GameService gameService, GameUtils gameUtils) {
         this.gameService = gameService;
         this.gameUtils = gameUtils;
     }
-
-    private String game_category;
 
     @GetMapping("/")
     public String home() {
@@ -33,49 +29,35 @@ public class GameController {
             @RequestParam(value = "category", required = false) String category,
             Model model) {
 
-        String updatedWord;
-        boolean gameOver=false;
-        // If a category was sent, remember it
-        if (category != null) {
-            game_category = category;
-        }
+        if (guessedCh == null || guessedCh.isBlank()) {
+            gameService.startNewGame(category);
+        } else {
+            if (!gameService.hasActiveGame()) {
+                gameService.startNewGame(category);
+            }
 
-        // CASE 1: Starting or restarting a game
-        if (guessedCh == null || guessedCh.isEmpty()) {
-            gameUtils.resetAttempts();
-            gameService.startNewGame(game_category);
-            updatedWord = gameService.getRandomWord();
-            gameOver=false;
-        }
+            String guess = guessedCh.trim();
 
-        // CASE 2: User guessed a character
-        else {
-
-            updatedWord = gameService.check(guessedCh.charAt(0));
-            if(gameUtils.getRemainingAttempts()==0)
-            {
-                gameOver=true;
+            if (guess.length() == 1) {
+                gameService.check(guess.charAt(0));
             }
         }
 
-        model.addAttribute("updatedWord", updatedWord);
+        boolean gameWon = gameService.isGameWon();
+        boolean gameOver = gameUtils.getRemainingAttempts() == 0 && !gameWon;
 
-        // Always get the CURRENT value directly from GameUtils
-        model.addAttribute(
-                "remainingAttempts",
-                gameUtils.getRemainingAttempts()
-        );
+        model.addAttribute("updatedWord", gameService.getRandomWord());
+        model.addAttribute("remainingAttempts", gameUtils.getRemainingAttempts());
+        model.addAttribute("category", gameService.getCategory());
+        model.addAttribute("gameOver", gameOver);
+        model.addAttribute("gameWon", gameWon);
+        model.addAttribute("chosenWord", gameService.getChosenWord());
+        model.addAttribute("guessedChars", gameService.getGuessedChars());
 
-        model.addAttribute("category", game_category);
-        model.addAttribute("gameOver",gameOver);
-        System.out.println("Guessed character: " + guessedCh);
-        model.addAttribute("gameWon", gameService.isGameWon());
-        model.addAttribute("chosenWord", gameService.getChosenWord());  
-         // Game over check
-        if (gameOver) { 
-            model.addAttribute("correctWord",
-                    gameService.getChosenWord());
-        }  
+        if (gameOver) {
+            model.addAttribute("correctWord", gameService.getChosenWord());
+        }
+
         return "game-home-page";
     }
 }
