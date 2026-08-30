@@ -3,8 +3,8 @@
 Guess the Word is a simple web-based word guessing game built using Spring Boot and Thymeleaf.
 
 The game starts with a category selection page. After selecting a category, a random word is chosen and displayed as hidden letters. The player has to guess the word one character at a time within a limited number of attempts.
-<img width="1803" height="828" alt="image" src="https://github.com/user-attachments/assets/a9c4b013-02ea-4047-b4fa-2b5d4441d771" />
 
+<img width="1920" height="1080" alt="Video Project 5" src="https://github.com/user-attachments/assets/185bc9ff-cd4d-49c9-9d0a-2eed4b5a4db0" />
 
 ## Features
 
