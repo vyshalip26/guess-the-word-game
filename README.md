@@ -2,22 +2,12 @@
 
 Guess the Word is a simple web-based word guessing game built using Spring Boot and Thymeleaf.
 
-The game starts with a category selection page. After selecting a category, a random word is chosen and displayed as hidden letters. The player has to guess the word one character at a time within a limited number of attempts.
+The game starts with a category selection page. After the user selects a category, a random word related to that category is chosen and displayed as hidden letters. The player has to guess the word one character at a time within 5 attempts.
+If the user failed to guess the word, Game-Over dialog box reveals the hidden word. Otherwise the user gets a success message (Game-Win dialog box).
 
+Here is a small clip showcasing the live site
 <img width="1920" height="1080" alt="Video Project 5" src="https://github.com/user-attachments/assets/185bc9ff-cd4d-49c9-9d0a-2eed4b5a4db0" />
 
-## Features
-
-- Choose from different word categories
-- Categories currently include Fruits, Vegetables, Colors, Food, Animals, and Birds
-- A random word is selected from the chosen category
-- The word is initially displayed using blanks
-- Correctly guessed characters are revealed in their respective positions
-- Incorrect guesses reduce the number of remaining attempts
-- The game shows a dialog when the player wins
-- The game also shows the correct word when all attempts are used
-- Restart the game with a new word from the same category
-- Return to the category selection page
 
 ## Technologies Used
 
@@ -47,3 +37,24 @@ src
         │   ├── home-page.html
         │   └── game-home-page.html
         └── application.properties
+```
+
+## How to try
+- LIVE DEMO : https://vyshu.hackclub.app/
+- Running it locally:
+  1. Clone the Repository.
+  ```
+  git clone https://github.com/vyshalip26/guess-the-word-game.git
+  ```
+
+  2. 
+     Run the application using maven.
+  ```
+  mvn spring-boot:run
+  ```
+  3. Open the application.
+     
+  http://localhost:8080
+
+## Author
+Vyshali
