@@ -34,25 +34,25 @@ public class GameController {
             Model model) {
 
         String updatedWord;
-        boolean gameOver=false;
-        // If a category was sent, remember it
+        boolean gameOver=false; 
+        boolean gameWon=false;
+        
         if (category != null) {
             game_category = category;
         }
-
-        // CASE 1: Starting or restarting a game
+ 
         if (guessedCh == null || guessedCh.isEmpty()) {
             gameUtils.resetAttempts();
             gameService.startNewGame(game_category);
-            updatedWord = gameService.getRandomWord();
-            gameOver=false;
+            updatedWord = gameService.getRandomWord(); 
         }
-
-        // CASE 2: User guessed a character
+         
         else {
+            char guessedCharacter = Character.toLowerCase(guessedCh.charAt(0));
 
-            updatedWord = gameService.check(guessedCh.charAt(0));
-            if(gameUtils.getRemainingAttempts()==0)
+            updatedWord = gameService.check(guessedCharacter);
+            gameWon=gameService.isGameWon();
+            if(gameUtils.getRemainingAttempts()==0 && !gameWon)
             {
                 gameOver=true;
             }
@@ -60,7 +60,6 @@ public class GameController {
 
         model.addAttribute("updatedWord", updatedWord);
 
-        // Always get the CURRENT value directly from GameUtils
         model.addAttribute(
                 "remainingAttempts",
                 gameUtils.getRemainingAttempts()
@@ -69,9 +68,9 @@ public class GameController {
         model.addAttribute("category", game_category);
         model.addAttribute("gameOver",gameOver);
         System.out.println("Guessed character: " + guessedCh);
-        model.addAttribute("gameWon", gameService.isGameWon());
+        model.addAttribute("gameWon", gameWon);
         model.addAttribute("chosenWord", gameService.getChosenWord());  
-         // Game over check
+       
         if (gameOver) { 
             model.addAttribute("correctWord",
                     gameService.getChosenWord());
