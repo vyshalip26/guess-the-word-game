@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Guess the Word Game</title>
-
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -80,11 +80,9 @@
             position: fixed;
             inset: 0;
             background: rgba(0, 0, 0, 0.65);
-
             display: flex;
             justify-content: center;
             align-items: center;
-
             z-index: 1000;
             animation: fadeIn 0.25s ease-out;
         }
@@ -116,7 +114,6 @@
 
         .game-over-buttons {
             margin-top: 25px;
-
             display: flex;
             justify-content: center;
             gap: 15px;
@@ -124,10 +121,8 @@
 
         .game-over-buttons a {
             text-decoration: none;
-
             padding: 10px 20px;
             border-radius: 8px;
-
             background: #014a36;
             color: white;
 
@@ -238,11 +233,9 @@
 
         </form>
 
-
-        <!-- RESTART FORM -->
+ 
         <form th:action="@{/game}" method="GET">
-
-            <!-- Restart the SAME category -->
+ 
             <input
                 type="hidden"
                 name="category"
@@ -252,7 +245,7 @@
             <input type="submit" value="Restart Game">
 
         </form>
-        <!-- SUCCESS DIALOG -->
+         
         <div id="successDialog" class="dialog-overlay"
             th:if="${gameWon}">
 
@@ -267,13 +260,10 @@
                 </h3>
 
                 <div class="dialog-buttons">
-
-                    <!-- Restart same category -->
+ 
                     <a th:href="@{/game(category=${category})}">
                         Restart Game
-                    </a>
-
-                    <!-- Go back to categories -->
+                    </a> 
                     <a th:href="@{/}">
                         Back to Categories
                     </a>
@@ -281,8 +271,7 @@
                 </div>
 
             </div>
-        </div>
-        <!-- GAME OVER DIALOG -->
+        </div> 
         <div class="game-over-overlay" th:if="${gameOver}">
 
             <div class="game-over-dialog">
@@ -297,13 +286,11 @@
                 </p>
 
                 <div class="game-over-buttons">
-
-                    <!-- Restart same category -->
+ 
                     <a th:href="@{/game(category=${category})}">
                         🔄 Restart
                     </a>
-
-                    <!-- Go back home -->
+ 
                     <a th:href="@{/}">
                         🏠 Back
                     </a>
