@@ -4,12 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
 
     <title>Guess the Word Game</title>
     
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Press Start 2P','VT323', monospace;
             background-color: #f0f0f0;
             margin: 0;
             padding: 20px;
@@ -45,7 +47,7 @@
 
         input[type="text"]:focus {
             outline: none;
-            border-color: #014a36;
+            border-color: #00aeff;
             box-shadow: 0 0 0 3px rgba(1, 74, 54, 0.15);
         }
 
@@ -53,15 +55,15 @@
             padding: 5px 10px;
             font-size: 16px;
             cursor: pointer;
-            border: 1px solid #014a36;
+            border: 1px solid #0074f9;
             border-radius: 4px;
             background: #fff;
-            color: #014a36;
+            color: #00c8ff;
             transition: background 0.2s ease, color 0.2s ease, transform 0.1s ease;
         }
 
         input[type="submit"]:hover {
-            background: #014a36;
+            background: #0096e0;
             color: #fff;
         }
 
@@ -123,7 +125,7 @@
             text-decoration: none;
             padding: 10px 20px;
             border-radius: 8px;
-            background: #014a36;
+            background: #00a6ff;
             color: white;
 
             font-weight: bold;
@@ -192,7 +194,7 @@
 
 <body>
 
-    <h1 align="center">Welcome to the Guess the Word Game</h1>
+    <h1 style="text-align: center; color: #009dff;">Guess the Word!</h1>
     <h3 align="center"> CATEGORY:  <b th:text="${category}">Fruits</b></h3>
     <h2 align="center">
         Guess this hidden word:
@@ -205,7 +207,7 @@
         attempts remaining
     </p>
 
-    <hr style="border: 11px solid #014a36c5;">
+    <hr style="border: 11px solid #009bfbc5;">
 
     <div align="center">
 

@@ -1,146 +1,145 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Guess the Word — The Garden Stall</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-<style> 
-  *{ box-sizing: border-box; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content=" width=device-width, initial-scale=1.0">
+    
+    <title>Guess the Word</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <style>
+        .container {
+            font-family: 'Press Start 2P', "consolas", monospace;
+            border-style: outset;
+            border-color: #000000;
+            background-color: #b9b3b3;
+            border-width: 2px;
+            padding: 10px; 
+        }
+        .container h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-align: center;
+            color: #000000; 
+        }
+        .container h1 big {
+            font-size: 32px;
+            color: #008bba;
+        }
+        .container h5 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            text-align: center; 
+        }
+        .container {
+            animation: reveal 1s ease-in-out;
+        }
+        @keyframes reveal {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .game-steps {
+            display: flex;
+            flex-direction: row;
+            font-family: 'VT323', monospace;
+            gap: 20px; 
+        }
+        .step{
+            flex:1;
+            border: 1px solid #000000;
+            padding: 10px;
+            background-color: #ffffff;
+        }
+        .hr{  
+            border: 2px solid #000000; 
+        }
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 4px;
+        }
+        .category{
+            font-family:'VT323','Press Start 2P', monospace;
+            border: 2px solid #000000;
+            background-color: #f1f2f2;
+            padding: 10px;
+            text-decoration: none;
+            color: #000000;
+            margin-top:-17px;
+            width: 150px;
+            font-size:25px;
+            text-align: center;
+        }
+        .category:hover {
+            background-color: #0086fa; 
+        } 
 
-  html, body{
-    margin:0; padding:0;
-    min-height:100vh;
-    background:
-      radial-gradient(circle at 15% 0%, rgba(127,176,105,0.10), transparent 45%),
-      radial-gradient(circle at 85% 100%, rgba(232,98,63,0.08), transparent 45%),
-      #f1f2f2;
-    color: #000000;
-    font-family: 'Nunito', sans-serif;
-  }
+    </style>
 
-  h1, h2, h3{ font-family: 'Baloo 2', sans-serif; }
- 
-  .wrap{
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 48px 20px 80px;
-  }
- 
-  .signboard{
-    text-align:center;
-    margin-bottom: 40px; 
-  } 
-
-  .eyebrow{
-    display:inline-block;
-    font-family:'Baloo 2', sans-serif;
-    font-weight:600;  
-    font-size:12px;
-    color: #98cc6e;
-    background:#2c4d38; 
-    padding: 6px 14px;
-    border-radius: 999px;
-    margin-bottom: 16px; 
-  } 
-
-  .signboard h1{
-    font-size: 42px;
-    margin: 0 0 12px;
-    font-weight: 800; 
-    color: #000000; 
-  }
-  .categories{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 16px;
-  }
-
-  .category{
-    display: block;
-    text-decoration: none;
-    background: #23402f;
-    border: 2px solid #2f5240;
-    border-radius: 12px;
-    padding: 20px;
-    text-align: center;
-    color: #f5ecd6;
-  }
-
-  .category:hover{
-    background: #2c4d38;
-  }
-
-  .icon{
-    font-size: 30px;
-    display: block;
-    margin-bottom: 8px;
-  }
-
-  .category h3{
-    margin: 0;
-    font-size: 18px;
-  }
-  .accent-word{ 
-    color: #2c4d38; 
-  } 
-
-  .signboard p.sub{
-    color:#f5ecd6;
-    font-size: 15px;
-    max-width: 500px;
-    margin: 0 auto; 
-  }
-
-   
-</style>
 </head>
 <body>
-
-<div class="wrap">
-
-  <div class="signboard">
-    <span class="eyebrow">🌿 The Garden Stall</span>
-    <h1>Guess the <span class="accent-word">Word</span></h1>
-    <p class="sub">Pick a stall below and see what's waiting to be guessed inside.</p>
-  </div>
-
-  <div class="section-label">
-    <h2>🧺 Browse Categories</h2> 
-  </div>
-
-  <div class="categories">
-      <a href="/game?category=fruits" class="category">
-        <span class="icon">🍊</span>
-        <h3>Fruits</h3>
-      </a>
-
-      <a href="/game?category=vegetables" class="category">
-        <span class="icon">🥕</span>
-        <h3>Vegetables</h3>
-      </a>
-
-      <a href="/game?category=colors" class="category">
-        <span class="icon">🎨</span>
-        <h3>Colors</h3>
-      </a>
-
-      <a href="/game?category=food" class="category">
-        <span class="icon">🍕</span>
-          <h3>Food</h3>
-      </a>
-      <a href="/game?category=animals" class="category">  
-          <span class="icon">🦁</span>
-          <h3>Animals</h3>  
-      </a>
-      <a href="/game?category=birds" class="category">  
-          <span class="icon">🐦</span>
-          <h3>Birds</h3>  
-      </a>
-  </div>
-  </div>
-</div>
-
+    <div class="container">
+        <h1> Welcome to <big><mark style="background-color: #faf600; color: #0086fa;">Guess The Word!</mark></big></h1>
+        <h5> Ready to test your skills and challenge yourself?</h5> 
+        <div class="game-steps">
+            <div class="step">
+                <h2>Step 1</h2>
+                <p>Choose a category and start guessing the word.</p>  
+                <img src="../static/categories.png" alt="Categories" style="width: 100%; height: 40%;">
+            </div>
+            <div class="step">
+                <h2>Step 2</h2>
+                <p>Guess the hidden word by typing a character one by one.</p>
+                <img src="../static/2nd.png" alt="Categories" style="width: 100%; height: 40%;">
+            </div>
+            <div class="step">
+                <h2>Step 3</h2>
+                <p>Keep guessing until you find the correct word or run out of attempts.</p>
+                <img src="../static/3rd.png" alt="Categories" style="width: 100%; height: 40%;">
+            </div>
+            <div class="step">
+                <h2>Step 4</h2>
+                <p>Try to make out the words again and again until you become a pro!</p>
+                <img src="../static/4rth.png" alt="Categories" style="width: 100%; height:40%;">
+            </div>
+        </div>
+    </div>
+    <hr class="hr">
+    <h1 style="text-align: center; font-family: 'Press Start 2P', monospace;">Choose a category!</h1>
+    <div class="categories">
+        
+        <a href="/game?category=fruits" class="category">
+            <span class="icon">🍊</span>
+            <h3>Fruits</h3>
+        </a>
+        <a href="/game?category=vegetables" class="category">
+            <span class="icon">🥕</span>
+            <h3>Vegetables</h3>
+        </a>
+        <a href="/game?category=animals" class="category">
+            <span class="icon">🐶</span>
+            <h3>Animals</h3>
+        </a>
+        <a href="/game?category=food" class="category">
+            <span class="icon">🍕</span>
+            <h3>Food</h3>
+        </a>
+        <a href="/game?category=birds" class="category">
+            <span class="icon">🐦</span>
+            <h3>Birds</h3>
+        </a>
+        <a href="/game?category=colors" class="category">
+            <span class="icon">🎨</span>
+            <h3>Colors</h3>
+        </a>
+    
 </body>
 </html>
