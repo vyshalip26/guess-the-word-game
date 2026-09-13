@@ -10,7 +10,8 @@ Here is a small clip showcasing the live site
 
 
 
-https://github.com/user-attachments/assets/17bbed30-673c-411b-aba6-73b52de41da0
+https://github.com/user-attachments/assets/ef7b95b7-0483-4c7f-8ab7-b2f9613a454b
+
 
  
 
